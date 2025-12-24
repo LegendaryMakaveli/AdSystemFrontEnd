@@ -1,4 +1,5 @@
 import style from "../pages/LandingPage.module.css"
+import { Link } from "react-router"
 
 const LandingPage = () => {
     return (
@@ -33,8 +34,12 @@ const LandingPage = () => {
                 <div className={style.messageInput}>
                     <h1>Welcome To Makaveli Hub</h1>
                     <p>Post your business for the world to see</p>
-                    <button className={style.login}>Login to Continue</button>
-                    <button className={style.signup}>SignUp to Continue</button>
+                    <Link to={"/login"}>
+                        <button className={style.login}>Login to Continue</button>
+                    </Link>
+                    <Link to={"/signup"}>
+                        <button className={style.signup}>SignUp to Continue</button>
+                    </Link>
                 </div>
             </div>
         </div>
