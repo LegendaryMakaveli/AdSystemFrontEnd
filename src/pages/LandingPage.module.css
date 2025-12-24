@@ -1,0 +1,207 @@
+.navContainer{
+    width: 90%;
+    height: 100vh;
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url(../assets/Makaveli.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+.topBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.topBar h1{
+    color: rgb(253, 23, 23);
+    font-size: 35px;
+    font-weight: bolder;
+}
+.topBarLinks ul{
+    display: flex;
+    color: rgb(253, 23, 23);
+    list-style: none;
+    padding: 0 40px 0 20px;
+    gap: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.topBarLinks ul li:hover{
+    color: #184b81;
+    transform: translateY(5px);
+}
+.icons span{
+    color: rgb(253, 23, 23);
+    cursor: pointer;
+    padding-right: 20px;
+    transition: transform 0.3s ease;
+}
+.icons span:hover{
+    color: #184b81;
+    transform: translateY(5px);
+}
+.smallNavLinks ul{
+    background-color: rgb(235, 158, 16);
+    display: flex;
+    height: 30px;
+    list-style: none;
+    gap: 100px;
+    text-align: center;
+    align-items: center ;
+    justify-content: center;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+.message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    opacity: 0;
+    animation: fadeIn 5s ease-in forwards;
+}
+@keyframes fadeIn {
+  from {
+        opacity: 0;
+  }
+  to {
+        opacity: 1;
+  }
+}
+.messageInput{
+    text-align: center;
+    color: white;
+}
+.messageInput h1{
+    font-size: 50px;
+    font-weight: bold;
+}
+.signup{
+    width: 300px;
+    height: 50px;
+    font-size: 15px;
+    color: #060d14;
+    font-weight: bold;
+    background-color: white;
+    margin-top: 50px;
+    border-radius: 10px;
+    border: none;
+    margin-left: 30px;
+    animation: bounce 2s infinite; 
+}
+.login{
+    width: 300px;
+    height: 50px;
+    font-size: 15px;
+    color: #060d14;
+    font-weight: bold;
+    background-color: white;
+    margin-top: 50px;
+    border-radius: 10px;
+    border: none;
+    margin-right: 30px;
+    animation: bounce 2s infinite; 
+}
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+
+@media (max-width: 1023px) {
+  .navContainer {
+    width: 95%;
+  }
+
+  .topBar h1 {
+    font-size: 30px;
+  }
+
+  .topBarLinks ul {
+    gap: 30px;
+    padding: 0 30px 0 15px;
+  }
+
+  .icons span {
+    padding-right: 15px;
+  }
+
+  .smallNavLinks ul {
+    gap: 80px;
+    font-size: 13px;
+  }
+
+  .messageInput h1 {
+    font-size: 40px;
+  }
+
+  .signup,
+  .login {
+    width: 250px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .navContainer {
+    width: 100%;
+    height: auto;
+  }
+
+  .topBar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  .topBar h1 {
+    display: none;
+  }
+
+  .topBarLinks ul {
+    flex-direction: row;
+    gap: 5px;
+    padding: 0 5px 0 5px;
+    font-size: 13px; 
+  }
+
+  .icons span {
+    padding-right: 5px;
+    font-size: 13px;
+  }
+
+  .smallNavLinks ul {
+    gap: 20px;
+    font-size: 11px; 
+    padding: 5px 10px;
+  }
+
+  .messageInput h1 {
+    font-size: 30px; /* Scale down font size */
+  }
+
+  .signup,
+  .login {
+    width: 150px; /* Scale down button width */
+    height: 40px; /* Scale down button height */
+    font-size: 12px; /* Scale down font size */
+    margin-left: 10px; /* Reduce margin */
+    margin-right: 10px; /* Reduce margin */
+  }
+}
