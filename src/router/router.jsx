@@ -1,7 +1,10 @@
-import {createBroswerRouter} from "react-redux"
+import {createBrowserRouter} from "react-router";
+import LandingPage from "../pages/LandingPage"
 
 
-const router = createBroswerRouter([
+const router = createBrowserRouter([
+    {path: "/", element: <LandingPage/>},
 
 ])
-export default router
+
+export default router;
