@@ -11,6 +11,8 @@ const Login = () => {
         password: ""
     });
     const [loginError, setLoginError] = useState("");
+    const [showRoleSelection, setShowRoleSelection] = useState(false);
+    const [selectedRole, setSelectedRole] = useState("");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,15 +24,84 @@ const Login = () => {
         try {
             const response = await login(formData).unwrap();
             localStorage.setItem("token", response.data.token);
-            navigate("/dashboard");
+            
+
+            setShowRoleSelection(true);
         } catch (err) {
             console.error("Login failed:", err);
             setLoginError(err.data?.message || "Login failed. Please check your credentials.");
         }
     };
 
+    const handleRoleSubmit = () => {
+        if (!selectedRole) {
+            alert("Please select a role");
+            return;
+        }
+
+        localStorage.setItem("userRole", selectedRole);
+
+        if (selectedRole === "buyer") {
+            navigate("/buyerDashboard");
+        } else if (selectedRole === "seller") {
+            navigate("/dashboard");
+        }
+    };
+
     if(isError) return <p>Error loading the page</p>
     if(error) return <p>Error!!!</p>
+
+    // Show role selection after login
+    if (showRoleSelection) {
+        return (
+            <div className={styles.loginContainer}>
+                <div className={styles.roleSelectionForm}>
+                    <h2>Are you buying or selling?</h2>
+                    <p>Choose your role to continue</p>
+
+                    <div className={styles.roleOptions}>
+                        <label className={selectedRole === "seller" ? styles.roleSelected : ""}>
+                            <input
+                                type="radio"
+                                name="role"
+                                value="seller"
+                                checked={selectedRole === "seller"}
+                                onChange={(e) => setSelectedRole(e.target.value)}
+                            />
+                            <div className={styles.roleCard}>
+                                <h3>🏪 Seller</h3>
+                                <p>Post listings and manage ads</p>
+                            </div>
+                        </label>
+
+                        <label className={selectedRole === "buyer" ? styles.roleSelected : ""}>
+                            <input
+                                type="radio"
+                                name="role"
+                                value="buyer"
+                                checked={selectedRole === "buyer"}
+                                onChange={(e) => setSelectedRole(e.target.value)}
+                            />
+                            <div className={styles.roleCard}>
+                                <h3>🛍️ Buyer</h3>
+                                <p>Browse listings and contact sellers</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button 
+                        onClick={handleRoleSubmit} 
+                        className={styles.loginButton}
+                        disabled={!selectedRole}
+                    >
+                        Continue
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    // Show login form
     return (
         <div className={styles.loginContainer}>
             <form onSubmit={submitHandle} className={styles.loginForm}>

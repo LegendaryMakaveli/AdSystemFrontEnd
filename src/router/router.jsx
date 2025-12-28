@@ -6,6 +6,7 @@ import DashBoard from "../pages/DashBoard";
 import CreateListing from "../components/createListing"
 import ViewListing from "../components/listingDetails"
 import UpdateListing from "../components/updateListing";
+import BuyerDashboard from "../pages/buyerDashboard";
 
 
 const router = createBrowserRouter([
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
     {path: "/dashboard", element: <DashBoard/>},
     {path: "/createListing", element: <CreateListing/>},
     {path: "/listing/:id", element: <ViewListing/>},
-    {path: "/updateListing/:id", element: <UpdateListing/>}
+    {path: "/updateListing/:id", element: <UpdateListing/>},
+    {path: "/buyerDashboard", element: <BuyerDashboard/>}
 
 ])
 

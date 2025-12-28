@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 import { useParams, useNavigate} from 'react-router';
 import { useGetListingByIdQuery, useUpdateListingMutation } from '../apis/listingApi';
 import style from './updateListing.module.css';
@@ -15,7 +15,7 @@ const UpdateListing = () => {
         title: '',
         category: '',
         description: '',
-        price: ''
+        price: '',
     });
     
     const [errors, setErrors] = useState({});
@@ -47,6 +47,29 @@ const UpdateListing = () => {
             }));
         }
     };
+
+    useEffect(() => {
+        setFormData({
+            title: '',
+            category: '',
+            description: '',
+            price: '',
+        });
+    }, [id]);
+
+    useEffect(() => {
+        if (listing && listing.id === id) { 
+            console.log('Listing ID:', listing.id);
+            console.log('Edit Token:', listing.editToken);
+            
+            setFormData({
+                title: listing.title || '',
+                category: listing.category || '',
+                description: listing.description || '',
+                price: listing.price || ''
+            });
+        }
+    }, [listing, id]);
 
     const validate = () => {
         const newErrors = {};
@@ -85,17 +108,26 @@ const UpdateListing = () => {
         }
         
         try {
-            const token = localStorage.getItem('token');
-            
+            const editToken = listing?.editToken;
+            console.log('Edit Token from formData:', editToken);
+
+            if (!editToken) {
+                alert('Edit token not found. You may not have permission to edit this listing.');
+                return;
+            }
+
             const updateData = {
                 title: formData.title.trim(),
+                category: formData.category.trim(),
                 description: formData.description.trim(),
                 price: parseFloat(formData.price)
             };
             
+            console.log('Sending update with token:', editToken);
+
             await updateListing({ 
                 id, 
-                token, 
+                token: editToken, 
                 data: updateData 
             }).unwrap();
             

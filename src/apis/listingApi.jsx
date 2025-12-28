@@ -5,7 +5,7 @@ const URL = import.meta.env.VITE_CLASSIFIED_AD_SYSTEM_URL;
 export const listingApi = createApi({
     reducerPath: "listingApi",
     baseQuery: fetchBaseQuery({baseUrl: URL,prepareHeaders: (headers) => {
-            const token = localStorage.getItem('token');
+          const token = localStorage.getItem('token');
             if (token) {
                 headers.set('Authorization', `Bearer ${token}`);
             }
