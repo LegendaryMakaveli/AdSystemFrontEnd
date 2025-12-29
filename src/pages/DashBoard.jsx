@@ -68,8 +68,7 @@ const DashBoard = () => {
     };
 
     const handleLogout = () => {
-        // localStorage.removeItem("token");
-        localStorage.clear();
+        localStorage.removeItem("token");
         window.location.href = "/";
     };
 

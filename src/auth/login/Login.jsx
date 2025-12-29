@@ -51,7 +51,6 @@ const Login = () => {
     if(isError) return <p>Error loading the page</p>
     if(error) return <p>Error!!!</p>
 
-    // Show role selection after login
     if (showRoleSelection) {
         return (
             <div className={styles.loginContainer}>
@@ -101,7 +100,6 @@ const Login = () => {
         );
     }
 
-    // Show login form
     return (
         <div className={styles.loginContainer}>
             <form onSubmit={submitHandle} className={styles.loginForm}>

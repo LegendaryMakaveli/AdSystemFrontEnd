@@ -20,7 +20,6 @@ export const listingApi = createApi({
         method: "POST",
         body: data
       }),
-      invalidatesTags: ['Listing'],
     }),
 
     addImage: builder.mutation({
@@ -64,7 +63,6 @@ export const listingApi = createApi({
         method: "PUT",
         body: data
       }),
-      invalidatesTags: ['Listing'],
     }),
 
     deleteListing: builder.mutation({
@@ -72,7 +70,6 @@ export const listingApi = createApi({
         url: `/listings/delete/${id}?token=${token}`,
         method: "DELETE"
       }),
-      invalidatesTags: ['Listing'],
     })
   }),
 });
