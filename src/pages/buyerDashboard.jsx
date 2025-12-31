@@ -62,7 +62,7 @@ const BuyerDashboard = () => {
   };
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("token");
     window.location.href = "/";
   };
 
@@ -81,8 +81,8 @@ const BuyerDashboard = () => {
     window.location.href = `mailto:${listing.contactEmail}?subject=Inquiry about ${encodeURIComponent(listing.title)}&body=${encodeURIComponent(message)}`;
   };
 
-  const handleCallSeller = (listing) => {
-    window.location.href = `tel:${listing.phone}`;
+  const handleCallSeller = (phone) => {
+    window.location.href = `tel:${phone}`;
   };
 
   const nextImage = () => {
@@ -261,10 +261,10 @@ const BuyerDashboard = () => {
                       <span className="material-symbols-outlined">visibility</span>
                       <span>View Details</span>
                     </button>
-                    {listing.contactPhone && (
+                    {listing.phone && (
                       <button 
                         className={styles.callButton}
-                        onClick={() => handleCallSeller(listing.contactPhone)}
+                        onClick={() => handleCallSeller(listing.phone)}
                       >
                         <span className="material-symbols-outlined">call</span>
                         <span>Call</span>
@@ -406,15 +406,15 @@ const BuyerDashboard = () => {
                         <p>{selectedListing.contactEmail}</p>
                       </div>
                     </button>
-                    {selectedListing.contactPhone && (
+                    {selectedListing.phone && (
                       <button 
                         className={styles.modalCallButton}
-                        onClick={() => handleCallSeller(selectedListing.contactPhone)}
+                        onClick={() => handleCallSeller(selectedListing.phone)}
                       >
                         <span className="material-symbols-outlined">call</span>
                         <div>
                           <strong>Call Seller</strong>
-                          <p>{selectedListing.contactPhone}</p>
+                          <p>{selectedListing.phone}</p>
                         </div>
                       </button>
                     )}

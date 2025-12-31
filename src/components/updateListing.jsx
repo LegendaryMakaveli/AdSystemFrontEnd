@@ -49,15 +49,6 @@ const UpdateListing = () => {
     };
 
     useEffect(() => {
-        setFormData({
-            title: '',
-            category: '',
-            description: '',
-            price: '',
-        });
-    }, [id]);
-
-    useEffect(() => {
         if (listing && listing.id === id) { 
             console.log('Listing ID:', listing.id);
             console.log('Edit Token:', listing.editToken);
@@ -182,7 +173,7 @@ const UpdateListing = () => {
 
             <div className={style.formContainer}>
                 <form onSubmit={handleSubmit} className={style.form}>
-                    {/* Title */}
+
                     <div className={style.formGroup}>
                         <label htmlFor="title">
                             <span className="material-symbols-outlined">title</span>
