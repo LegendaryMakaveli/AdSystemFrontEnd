@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react';
 import { useParams, useNavigate} from 'react-router';
 import { useGetListingByIdQuery, useUpdateListingMutation } from '../apis/listingApi';
-import style from './updateListing.module.css';
+import style from '../styles/updateListing.module.css';
 
 const UpdateListing = () => {
     const { id } = useParams();

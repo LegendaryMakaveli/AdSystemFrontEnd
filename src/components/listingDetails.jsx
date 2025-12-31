@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { useGetListingByIdQuery, useDeleteListingMutation } from '../apis/listingApi';
-import style from './listingDetails.module.css';
+import style from '../styles/listingDetails.module.css';
 
 const ViewListing = () => {
     const { id } = useParams();

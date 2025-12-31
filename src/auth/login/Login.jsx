@@ -1,6 +1,6 @@
-import styles from "../login/Login.module.css";
+import styles from "../../styles/Login.module.css";
 import { useState } from 'react';
-import { Link, useNavigate } from "react-router";
+import { Link, UNSAFE_ErrorResponseImpl, useNavigate } from "react-router";
 import { useLoginMutation } from "../../apis/authApis";
 
 const Login = () => {
@@ -24,7 +24,13 @@ const Login = () => {
         try {
             const response = await login(formData).unwrap();
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("userId", response.data.userId)
             
+            if (response.data.role === "ADMIN") {
+                localStorage.setItem("userRole", "ADMIN");
+                navigate("/admin");
+                return;
+            }
 
             setShowRoleSelection(true);
         } catch (err) {

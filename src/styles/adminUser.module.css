@@ -1,0 +1,141 @@
+.adminUsers h1 {
+  margin-bottom: 2rem;
+  color: #2d3748;
+  font-size: 2rem;
+}
+
+.searchBar {
+  margin-bottom: 1.5rem;
+}
+
+.searchBar input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.searchBar input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.usersTable {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: left;
+}
+
+tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:hover {
+  background: #f7fafc;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.badge.premium {
+  background: #ffd700;
+  color: #744210;
+}
+
+.badge.basic {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.badge.active {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.badge.inactive {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btnUpgrade,
+.btnDowngrade,
+.btnDelete {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.3s;
+  font-size: 0.85rem;
+}
+
+.btnUpgrade {
+  background: #48bb78;
+  color: white;
+}
+
+.btnDowngrade {
+  background: #ed8936;
+  color: white;
+}
+
+.btnDelete {
+  background: #f56565;
+  color: white;
+}
+
+.btnUpgrade:hover,
+.btnDowngrade:hover,
+.btnDelete:hover {
+  opacity: 0.8;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  font-size: 1.2rem;
+  color: #718096;
+}
+
+@media (max-width: 768px) {
+  .usersTable {
+    overflow-x: scroll;
+  }
+  
+  table {
+    min-width: 800px;
+  }
+}

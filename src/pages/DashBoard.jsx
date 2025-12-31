@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useGetAllQuery} from "../apis/listingApi";
-import style from "./DashBoard.module.css";
+import style from "../styles/DashBoard.module.css";
 
 const DashBoard = () => {
     const navigate = useNavigate();
@@ -17,7 +17,6 @@ const DashBoard = () => {
 
     const userActiveListings = useMemo(() => {
         if (!allListings || !Array.isArray(allListings)) return [];
-        
         return allListings.filter(listing => {
             const isUserListing = listing.userId === loggedInUserId;
             const isActive = listing.status === "ACTIVE" || listing.status === "active";
@@ -51,6 +50,7 @@ const DashBoard = () => {
             return matchesCategory && matchesLocation && matchesSearch;
         });
     }, [userActiveListings, filters]);
+
 
     const handleFilterChange = (filterName, value) => {
         setFilters(prev => ({

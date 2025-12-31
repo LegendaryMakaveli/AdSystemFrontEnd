@@ -1,0 +1,790 @@
+.createButtonBigConatiner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.createButtonContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.dashboardTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.createButton {
+  padding: 12px 24px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.createButton:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+
+.filtersContainer {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filtersHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filtersHeader h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.clearButton {
+  padding: 8px 16px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clearButton:hover {
+  background: #dc2626;
+}
+
+.filtersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filterGroup label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.filterGroup label .material-symbols-outlined {
+  font-size: 18px;
+  color: #666;
+}
+
+.filterGroup input,
+.filterGroup select {
+  padding: 10px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.filterGroup input:focus,
+.filterGroup select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.resultsCount {
+  padding: 12px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  text-align: center;
+}
+
+
+.listingsContainer {
+  padding: 0 20px 40px;
+}
+
+.listingsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+
+.listingCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.listingCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.listingImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageCount {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.imageCount .material-symbols-outlined {
+  font-size: 16px;
+}
+
+/* Card Content */
+.cardContent {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.listingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.listingHeader h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  flex: 1;
+}
+
+.category {
+  padding: 4px 12px;
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.description {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.listingDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.priceLabel {
+  font-size: 14px;
+  color: #666;
+}
+
+.priceAmount {
+  font-size: 24px;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.location .material-symbols-outlined {
+  font-size: 18px;
+}
+
+
+.listingActions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.listingActions .viewDetailsButton {
+  flex: 1;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.listingActions .viewDetailsButton:hover {
+  background: #0056b3;
+}
+
+.listingActions .callButton {
+  flex: 1;
+  padding: 10px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.listingActions .callButton:hover {
+  background: #218838;
+}
+
+.listingActions button:only-child {
+  flex: 1;
+}
+
+/* Loading, Error, Empty States */
+.loading,
+.error,
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.loading .material-symbols-outlined,
+.error .material-symbols-outlined,
+.emptyState .material-symbols-outlined {
+  font-size: 64px;
+  color: #d1d5db;
+  margin-bottom: 16px;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #f3f4f6;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading p,
+.error p,
+.emptyState p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 12px;
+  max-width: 1200px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.3s;
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modalBody {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 30px;
+}
+
+
+.modalImageSection {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mainImageContainer {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.imageNavButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.imageNavButton:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.prevButton {
+  left: 10px;
+}
+
+.nextButton {
+  right: 10px;
+}
+
+.imageCounter {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 14px;
+}
+
+.thumbnailContainer {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 5px 0;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.thumbnail:hover {
+  border-color: #007bff;
+  opacity: 0.8;
+}
+
+.activeThumbnail {
+  border-color: #007bff;
+}
+
+.noImagePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  color: #999;
+}
+
+.noImagePlaceholder .material-symbols-outlined {
+  font-size: 64px;
+  margin-bottom: 10px;
+}
+
+
+.modalDetailsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.modalHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modalHeader h2 {
+  font-size: 28px;
+  margin: 0;
+  color: #333;
+}
+
+.modalCategory {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.modalPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.modalPrice .priceLabel {
+  font-size: 16px;
+  color: #666;
+}
+
+.modalPrice .priceAmount {
+  font-size: 32px;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.modalSection {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
+}
+
+.modalSection h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  margin: 0 0 15px 0;
+  color: #333;
+}
+
+.modalSection h3 .material-symbols-outlined {
+  color: #666;
+}
+
+.modalSection p {
+  margin: 0;
+  line-height: 1.6;
+  color: #555;
+}
+
+.detailsList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detailItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.detailItem .material-symbols-outlined {
+  color: #666;
+  margin-top: 2px;
+}
+
+.detailItem strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #333;
+  font-size: 14px;
+}
+
+.detailItem p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.contactActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modalEmailButton,
+.modalCallButton {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: green;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: left;
+}
+
+.modalEmailButton:hover {
+  border-color: #007bff;
+  background: #f0f7ff;
+}
+
+.modalCallButton:hover {
+  border-color: #28a745;
+  background: #f0fff4;
+}
+
+.modalEmailButton .material-symbols-outlined,
+.modalCallButton .material-symbols-outlined {
+  font-size: 32px;
+  color: #666;
+}
+
+.modalEmailButton strong,
+.modalCallButton strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #333;
+  font-size: 14px;
+}
+
+.modalEmailButton p,
+.modalCallButton p {
+  margin: 0;
+  color: #007bff;
+  font-size: 14px;
+}
+
+.modalCallButton p {
+  color: #28a745;
+}
+
+
+
+@media (max-width: 768px) {
+  .createButtonBigConatiner {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .dashboardTitle {
+    font-size: 24px;
+  }
+
+  .filtersGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .listingsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .listingActions {
+    flex-direction: column;
+  }
+
+  .modalBody {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .mainImageContainer {
+    height: 300px;
+  }
+
+  .modalHeader h2 {
+    font-size: 22px;
+  }
+
+  .modalPrice .priceAmount {
+    font-size: 24px;
+  }
+
+  .closeButton {
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .createButtonBigConatiner {
+    padding: 15px;
+  }
+
+  .filtersContainer {
+    padding: 15px;
+  }
+
+  .listingsContainer {
+    padding: 0 10px 20px;
+  }
+
+  .listingsGrid {
+    gap: 16px;
+  }
+
+  .dashboardTitle {
+    font-size: 20px;
+  }
+
+  .imageContainer {
+    height: 180px;
+  }
+
+  .cardContent {
+    padding: 15px;
+  }
+
+  .listingHeader h3 {
+    font-size: 18px;
+  }
+
+  .priceAmount {
+    font-size: 20px;
+  }
+
+  .mainImageContainer {
+    height: 250px;
+  }
+
+  .thumbnailContainer {
+    gap: 8px;
+  }
+
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+}

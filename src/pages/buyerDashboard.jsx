@@ -1,9 +1,11 @@
 import { useState, useMemo } from 'react';
 import { useGetAllQuery } from '../apis/listingApi';
-import styles from './buyerDashboard.module.css';
+import styles from '../styles/buyerDashboard.module.css';
 
 const BuyerDashboard = () => {
   const { data: allListings, isLoading, isError, error } = useGetAllQuery();
+  const [selectedListing, setSelectedListing] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const [filters, setFilters] = useState({
     category: "",
@@ -21,15 +23,14 @@ const BuyerDashboard = () => {
   const { categories, locations } = useMemo(() => {
     if (!activeListings || activeListings.length === 0) return { categories: [], locations: [] };
     
-    const cats = [...new Set(activeListings.map(l => l.category).filter(Boolean))];
-    const locs = [...new Set(activeListings.map(l => l.location).filter(Boolean))];
+    const categories = [...new Set(activeListings.map(l => l.category).filter(Boolean))];
+    const locations = [...new Set(activeListings.map(l => l.location).filter(Boolean))];
     
     return {
-      categories: cats.sort(),
-      locations: locs.sort()
+      categories: categories.sort(),
+      locations: locations.sort()
     };
   }, [activeListings]);
-
 
   const filteredListings = useMemo(() => {
     if (!activeListings || activeListings.length === 0) return [];
@@ -65,13 +66,39 @@ const BuyerDashboard = () => {
     window.location.href = "/";
   };
 
-  const handleContactSeller = (listing) => {
-    const message = `Hi! I'm interested in your listing: ${listing.title}`;
-    window.location.href = `mailto:${listing.email}?subject=Inquiry about ${encodeURIComponent(listing.title)}&body=${encodeURIComponent(message)}`;
+  const handleViewDetails = (listing) => {
+    setSelectedListing(listing);
+    setCurrentImageIndex(0);
   };
 
-  const handleCallSeller = (phone) => {
-    window.location.href = `tel:${phone}`;
+  const closeModal = () => {
+    setSelectedListing(null);
+    setCurrentImageIndex(0);
+  };
+
+  const handleContactSeller = (listing) => {
+    const message = `Hi! I'm interested in your listing: ${listing.title}`;
+    window.location.href = `mailto:${listing.contactEmail}?subject=Inquiry about ${encodeURIComponent(listing.title)}&body=${encodeURIComponent(message)}`;
+  };
+
+  const handleCallSeller = (listing) => {
+    window.location.href = `tel:${listing.phone}`;
+  };
+
+  const nextImage = () => {
+    if (selectedListing?.images) {
+      setCurrentImageIndex((prev) => 
+        prev === selectedListing.images.length - 1 ? 0 : prev + 1
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedListing?.images) {
+      setCurrentImageIndex((prev) => 
+        prev === 0 ? selectedListing.images.length - 1 : prev - 1
+      );
+    }
   };
 
   return (
@@ -86,7 +113,6 @@ const BuyerDashboard = () => {
           </button>
         </div>
       </div>
-
 
       <div className={styles.filtersContainer}>
         <div className={styles.filtersHeader}>
@@ -157,7 +183,6 @@ const BuyerDashboard = () => {
         </div>
       </div>
 
-
       <div className={styles.listingsContainer}>
         {isLoading && (
           <div className={styles.loading}>
@@ -195,6 +220,12 @@ const BuyerDashboard = () => {
                       alt={listing.title}
                       className={styles.listingImage}
                     />
+                    {listing.images.length > 1 && (
+                      <span className={styles.imageCount}>
+                        <span className="material-symbols-outlined">photo_library</span>
+                        {listing.images.length}
+                      </span>
+                    )}
                   </div>
                 )}
                 
@@ -224,19 +255,21 @@ const BuyerDashboard = () => {
                   
                   <div className={styles.listingActions}>
                     <button 
-                      className={styles.emailButton}
-                      onClick={() => handleContactSeller(listing)}
+                      className={styles.viewDetailsButton}
+                      onClick={() => handleViewDetails(listing)}
                     >
-                      <span className="material-symbols-outlined">email</span>
-                      <span>Email</span>
+                      <span className="material-symbols-outlined">visibility</span>
+                      <span>View Details</span>
                     </button>
-                    <button 
-                      className={styles.callButton}
-                      onClick={() => handleCallSeller(listing.phone)}
-                    >
-                      <span className="material-symbols-outlined">call</span>
-                      <span>Call</span>
-                    </button>
+                    {listing.contactPhone && (
+                      <button 
+                        className={styles.callButton}
+                        onClick={() => handleCallSeller(listing.contactPhone)}
+                      >
+                        <span className="material-symbols-outlined">call</span>
+                        <span>Call</span>
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -244,6 +277,154 @@ const BuyerDashboard = () => {
           </div>
         )}
       </div>
+
+      {selectedListing && (
+        <div className={styles.modalOverlay} onClick={closeModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={closeModal}>
+              <span className="material-symbols-outlined">close</span>
+            </button>
+            
+            <div className={styles.modalBody}>
+
+
+              <div className={styles.modalImageSection}>
+                {selectedListing.images && selectedListing.images.length > 0 ? (
+                  <>
+                    <div className={styles.mainImageContainer}>
+                      <img 
+                        src={selectedListing.images[currentImageIndex]} 
+                        alt={`${selectedListing.title} - Image ${currentImageIndex + 1}`}
+                        className={styles.mainImage}
+                      />
+                      {selectedListing.images.length > 1 && (
+                        <>
+                          <button 
+                            className={`${styles.imageNavButton} ${styles.prevButton}`}
+                            onClick={prevImage}
+                          >
+                            <span className="material-symbols-outlined">chevron_left</span>
+                          </button>
+                          <button 
+                            className={`${styles.imageNavButton} ${styles.nextButton}`}
+                            onClick={nextImage}
+                          >
+                            <span className="material-symbols-outlined">chevron_right</span>
+                          </button>
+                          <div className={styles.imageCounter}>
+                            {currentImageIndex + 1} / {selectedListing.images.length}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    
+                    {selectedListing.images.length > 1 && (
+                      <div className={styles.thumbnailContainer}>
+                        {selectedListing.images.map((image, index) => (
+                          <img
+                            key={index}
+                            src={image}
+                            alt={`Thumbnail ${index + 1}`}
+                            className={`${styles.thumbnail} ${index === currentImageIndex ? styles.activeThumbnail : ''}`}
+                            onClick={() => setCurrentImageIndex(index)}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className={styles.noImagePlaceholder}>
+                    <span className="material-symbols-outlined">image</span>
+                    <p>No images available</p>
+                  </div>
+                )}
+              </div>
+
+
+              <div className={styles.modalDetailsSection}>
+                <div className={styles.modalHeader}>
+                  <h2>{selectedListing.title}</h2>
+                  <span className={styles.modalCategory}>{selectedListing.category}</span>
+                </div>
+
+                <div className={styles.modalPrice}>
+                  <span className={styles.priceLabel}>Price:</span>
+                  <span className={styles.priceAmount}>${selectedListing.price?.toLocaleString()}</span>
+                </div>
+
+                <div className={styles.modalSection}>
+                  <h3>
+                    <span className="material-symbols-outlined">description</span>
+                    Description
+                  </h3>
+                  <p>{selectedListing.description}</p>
+                </div>
+
+                <div className={styles.modalSection}>
+                  <h3>
+                    <span className="material-symbols-outlined">info</span>
+                    Details
+                  </h3>
+                  <div className={styles.detailsList}>
+                    <div className={styles.detailItem}>
+                      <span className="material-symbols-outlined">location_on</span>
+                      <div>
+                        <strong>Location</strong>
+                        <p>{selectedListing.location}</p>
+                      </div>
+                    </div>
+                    <div className={styles.detailItem}>
+                      <span className="material-symbols-outlined">calendar_today</span>
+                      <div>
+                        <strong>Posted</strong>
+                        <p>{selectedListing.createdAt || 'Recently'}</p>
+                      </div>
+                    </div>
+                    <div className={styles.detailItem}>
+                      <span className="material-symbols-outlined">category</span>
+                      <div>
+                        <strong>Category</strong>
+                        <p>{selectedListing.category}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.modalSection}>
+                  <h3>
+                    <span className="material-symbols-outlined">contact_phone</span>
+                    Contact Seller
+                  </h3>
+                  <div className={styles.contactActions}>
+                    <button 
+                      className={styles.modalEmailButton}
+                      onClick={() => handleContactSeller(selectedListing)}
+                    >
+                      <span className="material-symbols-outlined">email</span>
+                      <div>
+                        <strong>Send Email</strong>
+                        <p>{selectedListing.contactEmail}</p>
+                      </div>
+                    </button>
+                    {selectedListing.contactPhone && (
+                      <button 
+                        className={styles.modalCallButton}
+                        onClick={() => handleCallSeller(selectedListing.contactPhone)}
+                      >
+                        <span className="material-symbols-outlined">call</span>
+                        <div>
+                          <strong>Call Seller</strong>
+                          <p>{selectedListing.contactPhone}</p>
+                        </div>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

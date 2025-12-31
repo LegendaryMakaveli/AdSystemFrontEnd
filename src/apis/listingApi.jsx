@@ -4,17 +4,20 @@ const URL = import.meta.env.VITE_CLASSIFIED_AD_SYSTEM_URL;
 
 export const listingApi = createApi({
     reducerPath: "listingApi",
-    baseQuery: fetchBaseQuery({baseUrl: URL,prepareHeaders: (headers) => {
+    baseQuery: fetchBaseQuery({baseUrl: URL,
+      prepareHeaders: (headers, {endpoint}) => {
+        if(endpoint !== 'addImage'){
           const token = localStorage.getItem('token');
             if (token) {
                 headers.set('Authorization', `Bearer ${token}`);
             }
+          }
             
             return headers;
         }
     }),
     endpoints: (builder) => ({
-    createListing: builder.mutation({
+    createListing: builder.mutation({ 
       query: (data) => ({
         url: "/listings/create",
         method: "POST",

@@ -1,4 +1,4 @@
-import style from "../pages/LandingPage.module.css"
+import style from "../styles/LandingPage.module.css"
 import { Link } from "react-router"
 
 const LandingPage = () => {

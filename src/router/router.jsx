@@ -8,6 +8,15 @@ import ViewListing from "../components/listingDetails"
 import UpdateListing from "../components/updateListing";
 import BuyerDashboard from "../pages/buyerDashboard";
 
+import AdminDashboard from "../pages/AdminDashboard";
+import AdminUsers from "../pages/AdminUsers";
+import AdminListings from "../pages/AdminListing";
+import ProtectedAdminRoute from "../components/protectedAdminRoute";
+import AdminLayout from "../components/AdminLayout";
+
+
+
+
 
 const router = createBrowserRouter([
     {path: "/", element: <LandingPage/>},
@@ -17,8 +26,19 @@ const router = createBrowserRouter([
     {path: "/createListing", element: <CreateListing/>},
     {path: "/listing/:id", element: <ViewListing/>},
     {path: "/updateListing/:id", element: <UpdateListing/>},
-    {path: "/buyerDashboard", element: <BuyerDashboard/>}
-
+    {path: "/buyerDashboard", element: <BuyerDashboard/>},
+    
+    {path: "/admin", element: (
+            <ProtectedAdminRoute>
+                <AdminLayout />
+            </ProtectedAdminRoute>
+        ),
+        children: [
+            { index: true, element: <AdminDashboard /> },
+            { path: "users", element: <AdminUsers /> },
+            { path: "listings", element: <AdminListings /> }
+        ]
+    }
 ])
 
 export default router;

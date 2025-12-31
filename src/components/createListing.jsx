@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useCreateListingMutation, useAddImageMutation } from "../apis/listingApi";
-import style from "./CreateListing.module.css";
+import style from "../styles/CreateListing.module.css";
 
 const CreateListing = () => {
     const navigate = useNavigate();
@@ -122,19 +122,26 @@ const CreateListing = () => {
     };
 
     const uploadImages = async (listingId, editToken) => {
-        if (selectedFiles.length === 0) return true;
+        if (selectedFiles.length < 5) return true;
         
         setUploadingImages(true);
         
         try {
             for (const file of selectedFiles) {
-                await addImage({
+                console.log("Uploading file:", file.name, "Size:", file.size);
+                console.log("Listing ID:", listingId);
+                console.log("Edit Token:", editToken);
+
+               const result = await addImage({
                     id: listingId,
                     token: editToken,
                     file: file
                 }).unwrap();
+
+                console.log("Upload successful:", result);
             }
             return true;
+            
         } catch (error) {
             console.error("Failed to upload images:", error);
             alert("Listing created but some images failed to upload. You can add them later by editing the listing.");
@@ -173,7 +180,6 @@ const CreateListing = () => {
             let editToken = null;
             let listingId = null;
             
-            // Check various possible response structures
             if (result?.data) {
                 const payload = result.data;
                 listing = Array.isArray(payload) ? payload[0] : payload;

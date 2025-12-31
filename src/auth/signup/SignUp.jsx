@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import style from "../signup/SignUp.module.css";
+import style from "../../styles/SignUp.module.css";
 import { useSignupMutation } from "../../apis/authApis";
 import { Link } from "react-router";
 
