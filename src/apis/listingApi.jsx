@@ -49,16 +49,7 @@ export const listingApi = createApi({
       query: (id) => `/listings/${id}`,
       transformResponse: (response) => response.data || response,
     }),
-
-    getListingsByCity: builder.query({
-      query: (cityId) => `/listings/city/${cityId}`,
-      transformResponse: (response) => response.data || response,
-    }),
-
-    getListingsByCityAndCategory: builder.query({
-      query: ({ cityId, categoryId }) => `/listings/city/${cityId}/category/${categoryId}`,
-      transformResponse: (response) => response.data || response,
-    }),
+  
 
     updateListing: builder.mutation({
       query: ({ id, token, data }) => ({
@@ -82,8 +73,6 @@ export const {
   useCreateListingMutation,
   useAddImageMutation,
   useGetListingByIdQuery,
-  useGetListingsByCityQuery,
-  useGetListingsByCityAndCategoryQuery,
   useUpdateListingMutation,
   useDeleteListingMutation
 } = listingApi;
