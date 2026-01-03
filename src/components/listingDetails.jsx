@@ -196,26 +196,6 @@ const ViewListing = () => {
                         <h2>Description</h2>
                         <p>{listing.description}</p>
                     </div>
-
-                    {(listing.phone || listing.email) && (
-                        <div className={style.contactSection}>
-                            <h2>Contact Seller</h2>
-                            <div className={style.contactButtons}>
-                                {listing.phone && (
-                                    <a href={`tel:${listing.phone}`} className={style.contactButton}>
-                                        <span className="material-symbols-outlined">call</span>
-                                        Call Seller
-                                    </a>
-                                )}
-                                {listing.email && (
-                                    <a href={`mailto:${listing.email}`} className={style.contactButton}>
-                                        <span className="material-symbols-outlined">email</span>
-                                        Email Seller
-                                    </a>
-                                )}
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>
         </div>
