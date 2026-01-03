@@ -1,7 +1,8 @@
 import { useState, useMemo } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useGetAllQuery} from "../apis/listingApi";
 import style from "../styles/DashBoard.module.css";
+
 
 const DashBoard = () => {
     const navigate = useNavigate();
@@ -85,6 +86,11 @@ const DashBoard = () => {
                     <button className={style.createButton} onClick={handleLogout}>
                         Log Out
                     </button>
+                </div>
+                <div className={style.createButtonContainer}>
+                    <Link to={"/buyerDashboard"}>
+                        <span className={style.createButton}>🔙</span>
+                    </Link>
                 </div>
             </div>
 

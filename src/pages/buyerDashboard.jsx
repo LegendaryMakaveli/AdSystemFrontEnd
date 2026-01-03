@@ -1,11 +1,14 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router';
 import { useGetAllQuery } from '../apis/listingApi';
 import styles from '../styles/buyerDashboard.module.css';
 
 const BuyerDashboard = () => {
+  const navigate = useNavigate();
   const { data: allListings, isLoading, isError, error } = useGetAllQuery();
   const [selectedListing, setSelectedListing] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const [filters, setFilters] = useState({
     category: "",
@@ -51,6 +54,7 @@ const BuyerDashboard = () => {
       ...prev,
       [filterName]: value
     }));
+    setIsMobileMenuOpen(false);
   };
 
   const clearFilters = () => {
@@ -71,10 +75,7 @@ const BuyerDashboard = () => {
     setCurrentImageIndex(0);
   };
 
-  const closeModal = () => {
-    setSelectedListing(null);
-    setCurrentImageIndex(0);
-  };
+  
 
   const handleContactSeller = (listing) => {
     const message = `Hi! I'm interested in your listing: ${listing.title}`;
@@ -102,71 +103,52 @@ const BuyerDashboard = () => {
   };
 
   return (
-    <>
-      <div className={styles.createButtonBigConatiner}>
-        <div className={styles.createButtonContainer}>
-          <h1 className={styles.dashboardTitle}>Browse Listings</h1>
+    <div className={styles.marketplaceContainer}>
+      {isMobileMenuOpen && (
+        <div 
+          className={styles.mobileMenuOverlay} 
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      <aside className={`${styles.sidebar} ${isMobileMenuOpen ? styles.sidebarOpen : ''}`}>
+
+        <div className={styles.sidebarHeader}>
+          <h2 className={styles.sidebarTitle}>Makaveli Listing Service</h2>
         </div>
-        <div className={styles.createButtonContainer}>
-          <button className={styles.createButton} onClick={handleLogout}>
-            Log Out
+
+        <div className={styles.sidebarSection}>
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder="Search Marketplace..."
+            value={filters.searchText}
+            onChange={(e) => handleFilterChange("searchText", e.target.value)}
+          />
+        </div>
+
+        <div className={styles.sidebarSection}>
+          <button 
+            className={styles.sellButton}
+            onClick={() => navigate("/dashboard")}
+          >
+            <span className="material-symbols-outlined">add_circle</span>
+            Sell Something
           </button>
         </div>
-      </div>
 
-      <div className={styles.filtersContainer}>
-        <div className={styles.filtersHeader}>
-          <h3>Find What You Need</h3>
-          {(filters.category || filters.location || filters.searchText) && (
-            <button className={styles.clearButton} onClick={clearFilters}>
-              Clear Filters
-            </button>
-          )}
-        </div>
-        
-        <div className={styles.filtersGrid}>
+        <div className={styles.sidebarSection}>
+          <h3 className={styles.sectionTitle}>Filters</h3>
+          
           <div className={styles.filterGroup}>
-            <label htmlFor="searchText">
-              <span className="material-symbols-outlined">search</span>
-              Search
-            </label>
-            <input
-              type="text"
-              id="searchText"
-              placeholder="Search listings..."
-              value={filters.searchText}
-              onChange={(e) => handleFilterChange("searchText", e.target.value)}
-            />
-          </div>
-
-          <div className={styles.filterGroup}>
-            <label htmlFor="category">
-              <span className="material-symbols-outlined">category</span>
-              Category
-            </label>
-            <select
-              id="category"
-              value={filters.category}
-              onChange={(e) => handleFilterChange("category", e.target.value)}
-            >
-              <option value="">All Categories</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className={styles.filterGroup}>
-            <label htmlFor="location">
+            <label>
               <span className="material-symbols-outlined">location_on</span>
               Location
             </label>
             <select
-              id="location"
               value={filters.location}
               onChange={(e) => handleFilterChange("location", e.target.value)}
+              className={styles.filterSelect}
             >
               <option value="">All Locations</option>
               {locations.map((loc) => (
@@ -176,14 +158,67 @@ const BuyerDashboard = () => {
               ))}
             </select>
           </div>
+
+          {(filters.location || filters.searchText) && (
+            <button className={styles.clearFiltersButton} onClick={clearFilters}>
+              Clear Filters
+            </button>
+          )}
         </div>
 
-        <div className={styles.resultsCount}>
-          Showing {filteredListings.length} of {activeListings.length} listing{filteredListings.length !== 1 ? 's' : ''}
+        <div className={styles.sidebarSection}>
+          <h3 className={styles.sectionTitle}>Categories</h3>
+          <div className={styles.categoryList}>
+            <button
+              className={`${styles.categoryItem} ${!filters.category ? styles.active : ''}`}
+              onClick={() => handleFilterChange("category", "")}
+            >
+              <span className="material-symbols-outlined">grid_view</span>
+              All Categories
+            </button>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                className={`${styles.categoryItem} ${filters.category === cat ? styles.active : ''}`}
+                onClick={() => handleFilterChange("category", cat)}
+              >
+                <span className="material-symbols-outlined">category</span>
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className={styles.listingsContainer}>
+        <div className={styles.sidebarSection}>
+          <button className={styles.logoutButton} onClick={handleLogout}>
+            <span className="material-symbols-outlined">logout</span>
+            Log Out
+          </button>
+        </div>
+      </aside>
+
+    
+      <main className={styles.mainContent}>
+        
+        <button 
+          className={styles.mobileMenuButton}
+          onClick={() => setIsMobileMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          <span className="material-symbols-outlined">menu</span>
+        </button>
+
+        <div className={styles.contentHeader}>
+          <div>
+            <h1 className={styles.contentTitle}>
+              {filters.category || "Today's picks"}
+            </h1>
+            <p className={styles.resultsCount}>
+              {filteredListings.length} item{filteredListings.length !== 1 ? 's' : ''}
+            </p>
+          </div>
+        </div>
+
         {isLoading && (
           <div className={styles.loading}>
             <div className={styles.spinner}></div>
@@ -212,82 +247,51 @@ const BuyerDashboard = () => {
         {!isLoading && !isError && filteredListings.length > 0 && (
           <div className={styles.listingsGrid}>
             {filteredListings.map((listing) => (
-              <div key={listing.id} className={styles.listingCard}>
-                {listing.images && listing.images.length > 0 && (
-                  <div className={styles.imageContainer}>
+              <div 
+                key={listing.id} 
+                className={styles.listingCard}
+                onClick={() => handleViewDetails(listing)}
+              >
+                <div className={styles.imageWrapper}>
+                  {listing.images && listing.images.length > 0 ? (
                     <img 
                       src={listing.images[0]} 
                       alt={listing.title}
                       className={styles.listingImage}
                     />
-                    {listing.images.length > 1 && (
-                      <span className={styles.imageCount}>
-                        <span className="material-symbols-outlined">photo_library</span>
-                        {listing.images.length}
-                      </span>
-                    )}
-                  </div>
-                )}
-                
-                <div className={styles.cardContent}>
-                  <div className={styles.listingHeader}>
-                    <h3>{listing.title}</h3>
-                    <span className={styles.category}>
-                      {listing.category}
+                  ) : (
+                    <div className={styles.noImage}>
+                      <span className="material-symbols-outlined">image</span>
+                    </div>
+                  )}
+                  {listing.images && listing.images.length > 1 && (
+                    <span className={styles.imageCount}>
+                      <span className="material-symbols-outlined">photo_library</span>
+                      {listing.images.length}
                     </span>
-                  </div>
-                  
-                  <p className={styles.description}>
-                    {listing.description?.substring(0, 120)}
-                    {listing.description?.length > 120 ? '...' : ''}
-                  </p>
-                  
-                  <div className={styles.listingDetails}>
-                    <div className={styles.price}>
-                      <span className={styles.priceLabel}>Price:</span>
-                      <span className={styles.priceAmount}>${listing.price?.toLocaleString()}</span>
-                    </div>
-                    <div className={styles.location}>
-                      <span className="material-symbols-outlined">location_on</span>
-                      <span>{listing.location}</span>
-                    </div>
-                  </div>
-                  
-                  <div className={styles.listingActions}>
-                    <button 
-                      className={styles.viewDetailsButton}
-                      onClick={() => handleViewDetails(listing)}
-                    >
-                      <span className="material-symbols-outlined">visibility</span>
-                      <span>View Details</span>
-                    </button>
-                    {listing.phone && (
-                      <button 
-                        className={styles.callButton}
-                        onClick={() => handleCallSeller(listing.phone)}
-                      >
-                        <span className="material-symbols-outlined">call</span>
-                        <span>Call</span>
-                      </button>
-                    )}
+                  )}
+                </div>
+                
+                <div className={styles.cardInfo}>
+                  <div className={styles.cardPrice}>₦{listing.price?.toLocaleString()}</div>
+                  <div className={styles.cardTitle}>{listing.title}</div>
+                  <div className={styles.cardLocation}>
+                    <span className="material-symbols-outlined">location_on</span>
+                    {listing.location}
                   </div>
                 </div>
               </div>
             ))}
           </div>
         )}
-      </div>
+      </main>
+
 
       {selectedListing && (
-        <div className={styles.modalOverlay} onClick={closeModal}>
+        <div className={styles.modalOverlay}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={closeModal}>
-              <span className="material-symbols-outlined">close</span>
-            </button>
             
             <div className={styles.modalBody}>
-
-
               <div className={styles.modalImageSection}>
                 {selectedListing.images && selectedListing.images.length > 0 ? (
                   <>
@@ -340,7 +344,6 @@ const BuyerDashboard = () => {
                 )}
               </div>
 
-
               <div className={styles.modalDetailsSection}>
                 <div className={styles.modalHeader}>
                   <h2>{selectedListing.title}</h2>
@@ -349,7 +352,7 @@ const BuyerDashboard = () => {
 
                 <div className={styles.modalPrice}>
                   <span className={styles.priceLabel}>Price:</span>
-                  <span className={styles.priceAmount}>${selectedListing.price?.toLocaleString()}</span>
+                  <span className={styles.priceAmount}>₦{selectedListing.price?.toLocaleString()}</span>
                 </div>
 
                 <div className={styles.modalSection}>
@@ -425,7 +428,7 @@ const BuyerDashboard = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
