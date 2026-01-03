@@ -5,21 +5,6 @@ const LandingPage = () => {
     return (
     <>
         <div className={style.navContainer}>
-            <div className={style.topBar}>
-                <h1>Makaveli</h1>
-                <div className={style.topBarLinks}>
-                    <ul>
-                        <li>Get The App</li>
-                        <li>My Listing</li>
-                        <li>Create A Listing</li>
-                    </ul>
-                </div>
-                <div className={style.icons}>
-                    <span className="material-symbols-outlined">language</span>
-                    <span className="material-symbols-outlined">account_circle</span>
-                    <span className="material-symbols-outlined">favorite</span>
-                </div>
-            </div>
             <div className={style.smallNavLinks}>
                 <ul>
                     <li>About Us</li>

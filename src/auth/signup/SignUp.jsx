@@ -78,7 +78,7 @@ const SignUp = () => {
             const result = await signup(signupData).unwrap();
             console.log(result)
             localStorage.setItem("userEmail", formData.email);
-            navigate("/dashboard");
+            navigate("/buyerDashboard");
         } catch (err) {
             console.error("Signup failed:", err);
             console.log('Full error:', err);
