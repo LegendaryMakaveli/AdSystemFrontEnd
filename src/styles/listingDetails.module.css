@@ -261,6 +261,8 @@
     color: #1a1a1a;
     margin: 0;
     flex: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .category {
@@ -296,6 +298,8 @@
     color: white;
     font-size: 2.5rem;
     font-weight: 800;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .metaInfo {
@@ -337,6 +341,8 @@
     font-size: 1.05rem;
     line-height: 1.8;
     white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Contact Section */
@@ -407,24 +413,119 @@
         height: 300px;
     }
     
+    .infoSection {
+        padding: 1rem;
+    }
+    
     .titleSection {
         flex-direction: column;
+        gap: 0.75rem;
     }
     
     .titleSection h1 {
         font-size: 1.5rem;
+        line-height: 1.3;
+    }
+    
+    .category {
+        align-self: flex-start;
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+    }
+    
+    /* Fixed Price Section */
+    .priceSection {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .priceLabel {
+        font-size: 0.75rem;
     }
     
     .price {
-        font-size: 2rem;
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+    
+    /* Fixed Meta Info */
+    .metaInfo {
+        padding: 1rem;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .metaItem {
+        font-size: 0.875rem;
+        flex-basis: 100%;
+    }
+    
+    .metaItem span.material-symbols-outlined {
+        font-size: 1.25rem;
+    }
+    
+    /* Fixed Description Section */
+    .descriptionSection {
+        margin-bottom: 1rem;
+    }
+    
+    .descriptionSection h2 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .descriptionSection p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    /* Fixed Contact Section */
+    .contactSection {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .contactSection h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
     }
     
     .contactButtons {
         flex-direction: column;
+        gap: 0.75rem;
     }
     
     .contactButton {
         width: 100%;
         justify-content: center;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .contactButton span {
+        font-size: 1.25rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .content {
+        border-radius: 0.5rem;
+    }
+    
+    .titleSection h1 {
+        font-size: 1.25rem;
+    }
+    
+    .price {
+        font-size: 1.5rem;
+    }
+    
+    .descriptionSection p {
+        font-size: 0.875rem;
     }
 }
