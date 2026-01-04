@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useGetAllQuery } from '../apis/listingApi';
 import styles from '../styles/buyerDashboard.module.css';
 
@@ -75,7 +75,10 @@ const BuyerDashboard = () => {
     setCurrentImageIndex(0);
   };
 
-  
+  const closeModal = () => {
+    setSelectedListing(null);
+    setCurrentImageIndex(0);
+  };
 
   const handleContactSeller = (listing) => {
     const message = `Hi! I'm interested in your listing: ${listing.title}`;
@@ -104,6 +107,7 @@ const BuyerDashboard = () => {
 
   return (
     <div className={styles.marketplaceContainer}>
+      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div 
           className={styles.mobileMenuOverlay} 
@@ -111,10 +115,19 @@ const BuyerDashboard = () => {
         />
       )}
 
+      {/* Sidebar */}
       <aside className={`${styles.sidebar} ${isMobileMenuOpen ? styles.sidebarOpen : ''}`}>
+        {/* Mobile Close Button */}
+        <button 
+          className={styles.mobileCloseButton}
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          <span className="material-symbols-outlined">close</span>
+        </button>
 
         <div className={styles.sidebarHeader}>
-          <h2 className={styles.sidebarTitle}>Makaveli Listing Service</h2>
+          <h2 className={styles.sidebarTitle}>Marketplace</h2>
         </div>
 
         <div className={styles.sidebarSection}>
@@ -130,7 +143,7 @@ const BuyerDashboard = () => {
         <div className={styles.sidebarSection}>
           <button 
             className={styles.sellButton}
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate('/dashboard')}
           >
             <span className="material-symbols-outlined">add_circle</span>
             Sell Something
@@ -197,9 +210,9 @@ const BuyerDashboard = () => {
         </div>
       </aside>
 
-    
+      {/* Main Content */}
       <main className={styles.mainContent}>
-        
+        {/* Mobile Menu Button */}
         <button 
           className={styles.mobileMenuButton}
           onClick={() => setIsMobileMenuOpen(true)}
@@ -286,10 +299,13 @@ const BuyerDashboard = () => {
         )}
       </main>
 
-
+      {/* Modal */}
       {selectedListing && (
-        <div className={styles.modalOverlay}>
+        <div className={styles.modalOverlay} onClick={closeModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={closeModal}>
+              <span className="material-symbols-outlined">close</span>
+            </button>
             
             <div className={styles.modalBody}>
               <div className={styles.modalImageSection}>
