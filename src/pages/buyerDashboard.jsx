@@ -123,11 +123,10 @@ const BuyerDashboard = () => {
           onClick={() => setIsMobileMenuOpen(false)}
           aria-label="Close menu"
         >
-          <span className="material-symbols-outlined">close</span>
         </button>
 
         <div className={styles.sidebarHeader}>
-          <h2 className={styles.sidebarTitle}>Marketplace</h2>
+          <h2 className={styles.sidebarTitle}>Makaveli Advert System</h2>
         </div>
 
         <div className={styles.sidebarSection}>
@@ -146,7 +145,7 @@ const BuyerDashboard = () => {
             onClick={() => navigate('/dashboard')}
           >
             <span className="material-symbols-outlined">add_circle</span>
-            Sell Something
+            Post Your Advert
           </button>
         </div>
 
@@ -224,7 +223,7 @@ const BuyerDashboard = () => {
         <div className={styles.contentHeader}>
           <div>
             <h1 className={styles.contentTitle}>
-              {filters.category || "Today's picks"}
+              {filters.category || "Available Adverts"}
             </h1>
             <p className={styles.resultsCount}>
               {filteredListings.length} item{filteredListings.length !== 1 ? 's' : ''}

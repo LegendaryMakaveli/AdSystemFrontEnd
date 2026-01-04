@@ -22,9 +22,9 @@
 }
 
 .sidebarTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #050505;
+  font-size: 25px;
+  font-weight: bold;
+  color: blue;
   margin: 0;
 }
 
@@ -249,15 +249,15 @@
 }
 
 .contentTitle {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #050505;
+  font-size: 30px;
+  font-weight: bolder;
+  color: blue;
   margin: 0;
 }
 
 .resultsCount {
   font-size: 0.95rem;
-  color: #65676b;
+  color: #04369b;
   margin-top: 0.25rem;
 }
 
@@ -340,8 +340,8 @@
 
 .cardPrice {
   font-size: 1.125rem;
-  font-weight: 700;
-  color: #050505;
+  font-weight: bolder;
+  color: green;
   margin-bottom: 0.25rem;
 }
 
@@ -352,7 +352,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   line-height: 1.3;
 }
