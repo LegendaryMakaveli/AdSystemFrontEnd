@@ -103,8 +103,46 @@
     transform: none;
     box-shadow: none;
 }
+.passwordStrengthBox {
+  margin-top: 8px;
+}
 
-/* Responsive */
+.strengthBar {
+  height: 8px;
+  border-radius: 6px;
+  background: #ddd;
+  margin-bottom: 6px;
+  transition: 0.3s;
+}
+
+.strength-weak {
+  background: #e74c3c;
+}
+
+.strength-medium {
+  background: #f39c12;
+}
+
+.strength-strong {
+  background: #2ecc71;
+}
+
+.ruleList {
+  list-style: none;
+  padding-left: 0;
+  font-size: 12px;
+}
+
+.ruleItem {
+  margin: 2px 0;
+  color: #e74c3c;
+}
+
+.ruleItem.valid {
+  color: #2ecc71;
+}
+
+
 @media (max-width: 600px) {
     .formContainer {
         margin: 1rem;

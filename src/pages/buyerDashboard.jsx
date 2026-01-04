@@ -107,7 +107,7 @@ const BuyerDashboard = () => {
 
   return (
     <div className={styles.marketplaceContainer}>
-      {/* Mobile Menu Overlay */}
+
       {isMobileMenuOpen && (
         <div 
           className={styles.mobileMenuOverlay} 
@@ -115,9 +115,9 @@ const BuyerDashboard = () => {
         />
       )}
 
-      {/* Sidebar */}
+
       <aside className={`${styles.sidebar} ${isMobileMenuOpen ? styles.sidebarOpen : ''}`}>
-        {/* Mobile Close Button */}
+
         <button 
           className={styles.mobileCloseButton}
           onClick={() => setIsMobileMenuOpen(false)}
@@ -210,9 +210,9 @@ const BuyerDashboard = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
+
       <main className={styles.mainContent}>
-        {/* Mobile Menu Button */}
+
         <button 
           className={styles.mobileMenuButton}
           onClick={() => setIsMobileMenuOpen(true)}
@@ -299,7 +299,7 @@ const BuyerDashboard = () => {
         )}
       </main>
 
-      {/* Modal */}
+
       {selectedListing && (
         <div className={styles.modalOverlay} onClick={closeModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>

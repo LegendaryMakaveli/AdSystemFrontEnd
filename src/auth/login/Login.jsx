@@ -29,7 +29,7 @@ const Login = () => {
                 navigate("/admin");
                 return;
             }
-            
+
             localStorage.setItem("userRole", "buyer");
             navigate("/buyerDashboard");
             

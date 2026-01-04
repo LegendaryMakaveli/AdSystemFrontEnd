@@ -13,8 +13,7 @@ const ViewListing = () => {
     const [deleteListing, { isLoading: isDeleting }] = useDeleteListingMutation();
 
     const handleBack = () => {
-        // Go back to buyer dashboard (marketplace)
-        navigate('/buyerDashboard');
+        navigate('/dashboard');
     };
 
     const handleDelete = async () => {
@@ -32,7 +31,7 @@ const ViewListing = () => {
         try {
             await deleteListing({ id: listing.id, token: editToken }).unwrap();
             alert("Listing deleted successfully!");
-            navigate('/buyerDashboard');
+            navigate('/dashboard');
         } catch (error) {
             console.error("Delete error:", error);
             const errorMessage = error?.data?.message || error?.data?.data || error?.message || "Unknown error";
@@ -78,7 +77,7 @@ const ViewListing = () => {
                     <span className="material-symbols-outlined">error</span>
                     <p>Failed to load listing. {error?.data?.message || "Please try again."}</p>
                     <button onClick={handleBack} className={style.backButton}>
-                        Back to Marketplace
+                        Back to Dashboard
                     </button>
                 </div>
             </div>
@@ -92,7 +91,7 @@ const ViewListing = () => {
                     <span className="material-symbols-outlined">info</span>
                     <p>Listing not found.</p>
                     <button onClick={handleBack} className={style.backButton}>
-                        Back to Marketplace
+                        Back to Dashboard
                     </button>
                 </div>
             </div>
