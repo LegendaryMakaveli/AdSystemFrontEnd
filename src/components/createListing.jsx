@@ -122,28 +122,42 @@ const CreateListing = () => {
     };
 
     const uploadImages = async (listingId, editToken) => {
-        if (selectedFiles.length < 5) return true;
+        // FIXED: Check if there are NO files, return early
+        if (selectedFiles.length === 0) {
+            console.log("No images to upload");
+            return true;
+        }
         
         setUploadingImages(true);
         
         try {
-            for (const file of selectedFiles) {
-                console.log("Uploading file:", file.name, "Size:", file.size);
+            console.log(`Starting upload of ${selectedFiles.length} images...`);
+            
+            for (let index = 0; index < selectedFiles.length; index++) {
+                const file = selectedFiles[index];
+                console.log(`Uploading image ${index + 1}/${selectedFiles.length}:`, file.name, "Size:", file.size);
                 console.log("Listing ID:", listingId);
                 console.log("Edit Token:", editToken);
 
-               const result = await addImage({
+                const result = await addImage({
                     id: listingId,
                     token: editToken,
                     file: file
                 }).unwrap();
 
-                console.log("Upload successful:", result);
+                console.log(`Image ${index + 1} uploaded successfully:`, result);
             }
+            
+            console.log("All images uploaded successfully!");
             return true;
             
         } catch (error) {
             console.error("Failed to upload images:", error);
+            console.error("Error details:", {
+                message: error.message,
+                data: error.data,
+                status: error.status
+            });
             alert("Listing created but some images failed to upload. You can add them later by editing the listing.");
             return false;
         } finally {
@@ -188,7 +202,6 @@ const CreateListing = () => {
             } else {
                 listing = result;
             }
-        
             
             if (!listing) {
                 throw new Error("No listing data returned from API");
@@ -218,12 +231,17 @@ const CreateListing = () => {
             localStorage.setItem("listingId", listingId);
             console.log("Saved listingId to localStorage:", listingId);
             
+            // Upload images if there are any
             if (selectedFiles.length > 0 && editToken) {
+                console.log("Starting image upload process...");
                 await uploadImages(listingId, editToken);
+            } else if (selectedFiles.length > 0 && !editToken) {
+                console.warn("Cannot upload images: No edit token available");
+                alert("Listing created but images cannot be uploaded without edit token.");
             }
             
             alert("Listing created successfully!");
-            navigate("/dashboard");
+            navigate("/buyerDashboard");
             
         } catch (err) {
             console.error("Failed to create listing:", err);
@@ -253,11 +271,11 @@ const CreateListing = () => {
         <div className={style.container}>
             <div className={style.formCard}>
                 <button
-                    onClick={() => navigate("/dashboard")}
+                    onClick={() => navigate("/buyerDashboard")}
                     className={style.backButton}
                 >
                     <span className="material-symbols-outlined">arrow_back</span>
-                    Back to Dashboard
+                    Back to Marketplace
                 </button>
                 
                 <h1 className={style.title}>Create a Listing</h1>
@@ -275,7 +293,7 @@ const CreateListing = () => {
                     <div className={style.imageUploadSection}>
                         <label className={style.sectionLabel}>
                             <span className="material-symbols-outlined">photo_camera</span>
-                            Photos (Optional ------   Max 5)
+                            Photos (Optional - Max 5)
                         </label>
                         
                         <div className={style.imageUploadArea}>
@@ -366,7 +384,7 @@ const CreateListing = () => {
                         <div className={style.labelInput}>
                             <label htmlFor="price">
                                 <span className="material-symbols-outlined">payments</span>
-                                Price ($) *
+                                Price (₦) *
                             </label>
                             <input
                                 type="number"
@@ -418,7 +436,7 @@ const CreateListing = () => {
                             name="location"
                             value={formData.location}
                             onChange={handleChange}
-                            placeholder="e.g., New York, NY"
+                            placeholder="e.g., Lagos, Nigeria"
                         />
                         {formErrors.location && (
                             <span className={style.error}>{formErrors.location}</span>
@@ -455,7 +473,7 @@ const CreateListing = () => {
                                 name="contactPhone"
                                 value={formData.contactPhone}
                                 onChange={handleChange}
-                                placeholder="+1 (555) 123-4567"
+                                placeholder="+234 123 456 7890"
                             />
                         </div>
                     </div>
@@ -485,7 +503,7 @@ const CreateListing = () => {
                         </button>
                         <button
                             type="button"
-                            onClick={() => navigate("/dashboard")}
+                            onClick={() => navigate("/buyerDashboard")}
                             className={style.cancelButton}
                             disabled={isLoading || uploadingImages}
                         >
