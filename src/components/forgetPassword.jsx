@@ -43,10 +43,9 @@ const ForgotPassword = () => {
             }).unwrap();
 
             if (response.success) {
-                setSuccess('Password reset successfully! Redirecting to dashboard...');
-                setTimeout(() => {
-                    navigate('/buyerDashboard');
-                }, 2000);
+                console.log(response)
+                setSuccess('Password reset successfully! Redirecting...');
+                setTimeout(() => navigate('/buyerDashboard'), 2000);
             }
         } catch (err) {
             console.error('Reset password error:', err);
