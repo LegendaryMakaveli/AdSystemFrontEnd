@@ -98,6 +98,9 @@ const Login = () => {
                     {capsLockOn && (
                         <p className={styles.warningText}>⚠️ Caps Lock is ON</p>
                     )}
+                    <Link to={"/resetPassword"}>
+                        <p className={styles.forgetPassword}>Forget password</p>
+                    </Link>
                 </div>
                 <button type="submit" className={styles.loginButton} disabled={!formData.password || !formData.email}>Login</button>
             </form>

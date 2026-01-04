@@ -114,6 +114,14 @@
   font-size: 12px;
   margin-top: 4px;
 }
+.forgetPassword{
+    color: rgba(255, 255, 255, 0.534);
+    text-align: end;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
 
 
 
