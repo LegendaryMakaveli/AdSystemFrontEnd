@@ -7,6 +7,9 @@ import { Link } from "react-router";
 const SignUp = () => {
   const navigate = useNavigate();
   const [signup, { isLoading }] = useSignupMutation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -200,13 +203,22 @@ const SignUp = () => {
         <div className={style.labelInput}>
           <label htmlFor="password">Password</label>
 
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
+          <div className={style.passwordWrapper}>
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className={style.toggleBtn}
+              onClick={() => setShowPassword((prev) => !prev)}
+              >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>  
 
           <div className={style.passwordStrengthBox}>
             <div
@@ -267,13 +279,23 @@ const SignUp = () => {
         <div className={style.labelInput}>
           <label htmlFor="confirmPassword">Confirm Password</label>
 
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          />
+          <div className={style.passwordWrapper}>
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+
+            <button
+            type="button"
+            className={style.toggleBtn}
+            onClick={() => setShowConfirmPassword((prev) => !prev)}
+            >
+            {showConfirmPassword ? "Hide" : "Show"}
+            </button>
+          </div>
 
           {formErrors.confirmPassword && (
             <span className={style.error}>{formErrors.confirmPassword}</span>

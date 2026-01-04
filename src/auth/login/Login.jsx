@@ -5,7 +5,9 @@ import { useLoginMutation } from "../../apis/authApis";
 
 const Login = () => {
     const [login, { isError, error }] = useLoginMutation();
+    const [capsLockOn, setCapsLockOn] = useState(false);
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: "",    
         password: ""
@@ -35,7 +37,17 @@ const Login = () => {
             
         } catch (err) {
             console.error("Login failed:", err);
-            setLoginError(err.data?.message || "Login failed. Please check your credentials.");
+
+            const msg =
+                err?.data?.message === "Invalid credentials"
+                ? "Incorrect email or password."
+                : err?.data?.message === "User not found"
+                ? "No account found with this email."
+                : err?.data?.message || "Login failed. Please try again.";
+
+            setLoginError(msg);
+
+            alert(msg);
         }
     };
 
@@ -61,16 +73,33 @@ const Login = () => {
                 </div>
                 <div className={styles.loginInput}>
                     <label htmlFor="password">Password</label>
-                    <input
-                        onChange={handleChange}
-                        name="password"
-                        className={styles.input}
-                        type="password"
-                        placeholder="Enter your password"
-                        required
-                    />
+
+                    <div className={styles.passwordWrapper}>
+                        <input
+                            onChange={handleChange}
+                            name="password"
+                            className={styles.input}
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Enter your password"
+                            required
+                            onKeyDown={(e) => setCapsLockOn(e.getModifierState("CapsLock"))}
+                            onKeyUp={(e) => setCapsLockOn(e.getModifierState("CapsLock"))}
+                            onBlur={() => setCapsLockOn(false)}
+                        />
+
+                        <button
+                        type="button"
+                        className={styles.toggleBtn}
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        >
+                        {showPassword ? "🙈" : "👁"}
+                        </button>
+                    </div>  
+                    {capsLockOn && (
+                        <p className={styles.warningText}>⚠️ Caps Lock is ON</p>
+                    )}
                 </div>
-                <button type="submit" className={styles.loginButton}>Login</button>
+                <button type="submit" className={styles.loginButton} disabled={!formData.password || !formData.email}>Login</button>
             </form>
             <p className={styles.signupLink}>
                 Don't have an account? <Link to="/signup">Sign Up</Link>

@@ -120,11 +120,11 @@
 }
 
 .strength-medium {
-  background: #f39c12;
+  background: #2ecc71;
 }
 
 .strength-strong {
-  background: #2ecc71;
+  background: #f39c12;
 }
 
 .ruleList {
@@ -148,6 +148,29 @@
         margin: 1rem;
         padding: 1.5rem;
     }
+}
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordWrapper input {
+  flex: 1;
+}
+
+.toggleBtn {
+  margin-left: 8px;
+  font-size: 12px;
+  padding: 6px 10px;
+  background: #f4f4f4;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.toggleBtn:hover {
+  background: #e9e9e9;
 }
 
 
