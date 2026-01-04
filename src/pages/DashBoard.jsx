@@ -89,7 +89,7 @@ const DashBoard = () => {
                 </div>
                 <div className={style.createButtonContainer}>
                     <Link to={"/buyerDashboard"}>
-                        <span className={style.createButton}>🔙</span>
+                        <span className={style.backButton}>🔙</span>
                     </Link>
                 </div>
             </div>
@@ -221,7 +221,7 @@ const DashBoard = () => {
                                     <div className={style.listingDetails}>
                                         <div className={style.price}>
                                             <span className={style.priceLabel}>Price:</span>
-                                            <span className={style.priceAmount}>${listing.price?.toLocaleString()}</span>
+                                            <span className={style.priceAmount}>#{listing.price?.toLocaleString()}</span>
                                         </div>
                                         <div className={style.location}>
                                             <span className="material-symbols-outlined">location_on</span>

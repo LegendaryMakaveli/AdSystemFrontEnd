@@ -286,7 +286,7 @@ const BuyerDashboard = () => {
                 
                 <div className={styles.cardInfo}>
                   <div className={styles.cardPrice}>₦{listing.price?.toLocaleString()}</div>
-                  <div className={styles.cardTitle}>{listing.title}</div>
+                  <div className={styles.cardTitle}>{listing.title.toUpperCase()}</div>
                   <div className={styles.cardLocation}>
                     <span className="material-symbols-outlined">location_on</span>
                     {listing.location}
