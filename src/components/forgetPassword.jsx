@@ -43,9 +43,9 @@ const ForgotPassword = () => {
             }).unwrap();
 
             if (response.success) {
-                setSuccess('Password reset successfully! Redirecting to login...');
+                setSuccess('Password reset successfully! Redirecting to dashboard...');
                 setTimeout(() => {
-                    navigate('/login');
+                    navigate('/buyerDashboard');
                 }, 2000);
             }
         } catch (err) {
