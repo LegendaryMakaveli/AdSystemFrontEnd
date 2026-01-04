@@ -12,7 +12,12 @@ const ViewListing = () => {
     
     const [deleteListing, { isLoading: isDeleting }] = useDeleteListingMutation();
 
-     const handleDelete = async () => {
+    const handleBack = () => {
+        // Go back to buyer dashboard (marketplace)
+        navigate('/buyerDashboard');
+    };
+
+    const handleDelete = async () => {
         if (!window.confirm("Are you sure you want to delete this listing?")) {
             return;
         }
@@ -27,7 +32,7 @@ const ViewListing = () => {
         try {
             await deleteListing({ id: listing.id, token: editToken }).unwrap();
             alert("Listing deleted successfully!");
-            navigate('/dashboard');
+            navigate('/buyerDashboard');
         } catch (error) {
             console.error("Delete error:", error);
             const errorMessage = error?.data?.message || error?.data?.data || error?.message || "Unknown error";
@@ -72,8 +77,8 @@ const ViewListing = () => {
                 <div className={style.error}>
                     <span className="material-symbols-outlined">error</span>
                     <p>Failed to load listing. {error?.data?.message || "Please try again."}</p>
-                    <button onClick={() => navigate('/dashboard')} className={style.backButton}>
-                        Back to Dashboard
+                    <button onClick={handleBack} className={style.backButton}>
+                        Back to Marketplace
                     </button>
                 </div>
             </div>
@@ -86,8 +91,8 @@ const ViewListing = () => {
                 <div className={style.error}>
                     <span className="material-symbols-outlined">info</span>
                     <p>Listing not found.</p>
-                    <button onClick={() => navigate('/dashboard')} className={style.backButton}>
-                        Back to Dashboard
+                    <button onClick={handleBack} className={style.backButton}>
+                        Back to Marketplace
                     </button>
                 </div>
             </div>
@@ -97,9 +102,9 @@ const ViewListing = () => {
     return (
         <div className={style.container}>
             <div className={style.header}>
-                <button onClick={() => navigate('/dashboard')} className={style.backButton}>
+                <button onClick={handleBack} className={style.backButton}>
                     <span className="material-symbols-outlined">arrow_back</span>
-                    Back to Dashboard
+                    Back to Marketplace
                 </button>
                 
                 <div className={style.headerActions}>
@@ -175,7 +180,7 @@ const ViewListing = () => {
 
                     <div className={style.priceSection}>
                         <span className={style.priceLabel}>Price</span>
-                        <span className={style.price}>${listing.price?.toLocaleString()}</span>
+                        <span className={style.price}>₦{listing.price?.toLocaleString()}</span>
                     </div>
 
                     <div className={style.metaInfo}>
