@@ -37,16 +37,12 @@ const ForgotPassword = () => {
         }
 
         try {
-            const response = await resetPassword({ 
-                email: formData.email, 
-                newPassword: formData.newPassword 
-            }).unwrap();
+            const { confirmPassword, ...resetPasswordData } = formData;
 
-            if (response.success) {
-                console.log(response)
+            const result = await resetPassword(resetPasswordData).unwrap();
+                console.log(result)
                 setSuccess('Password reset successfully! Redirecting...');
                 setTimeout(() => navigate('/buyerDashboard'), 2000);
-            }
         } catch (err) {
             console.error('Reset password error:', err);
             const errorMessage = err?.data?.data || err?.data?.message || 'Email not found. Please check and try again.';
