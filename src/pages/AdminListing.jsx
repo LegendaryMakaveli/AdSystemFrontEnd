@@ -58,7 +58,7 @@ const AdminListings = () => {
             </p>
             <div className={styles.listingDetails}>
               <span className={styles.price}>
-                ${listing.price?.toLocaleString()}
+                #{listing.price?.toLocaleString()}
               </span>
               <span className={styles.category}>{listing.category}</span>
             </div>
