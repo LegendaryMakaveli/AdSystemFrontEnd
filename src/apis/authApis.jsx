@@ -26,8 +26,11 @@ export const authApi = createApi({
                 method: "POST",
                 body: data
             })
-        })
+        }),
+        healthCheck: builder.query({
+            query: () => '/health',
+        }),
     })
 });
 
-export const { useSignupMutation, useLoginMutation, useResetPasswordMutation } = authApi;
+export const { useSignupMutation, useLoginMutation, useResetPasswordMutation, useHealthCheckQuery } = authApi;
